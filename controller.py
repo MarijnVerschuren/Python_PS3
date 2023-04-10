@@ -39,6 +39,9 @@ class Trigger(Component):
     def __init__(self, event_name: str) -> None:
         super(Trigger, self).__init__(event_name)
         self._x = 0
+    
+    @property
+    def raw(self) -> int: return self._x
 
     @property
     def x(self) -> float: return self._x / 255
@@ -52,6 +55,11 @@ class Joystick(Component):
         super(Joystick, self).__init__(event_name)
         self._x = 0
         self._y = 0
+        
+    @property
+    def raw_x(self) -> int: return self._x
+    @property
+    def raw_y(self) -> int: return self._y
 
     @property
     def x(self) -> float: return (self._x - 127.5) / 127.5
@@ -125,7 +133,7 @@ class PS3(Controller):
         RT: {self.trigger_R.x}
         TRIANGLE: {self.y.pressed}
         CIRCLE:   {self.b.pressed}
-        CROSS:    {self.a.pressed}
+        X_BUTTON: {self.a.pressed}
         SQUARE:   {self.x.pressed}
         UP:       {self.up.pressed}
         RIGHT:    {self.right.pressed}
